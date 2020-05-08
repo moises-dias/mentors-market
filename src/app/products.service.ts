@@ -19,7 +19,7 @@ export class ProductsService {
   addProduct(title: string, price: string, description: string){
     console.log('here');
     const newProduct = new Product('', title, price, description);
-    return this.http.post('https://mentors-market.firebaseio.com/products.json', {...newProduct, id: null })
+    return this.http.post<{name: string}>('https://mentors-market.firebaseio.com/products.json', {...newProduct, id: null })
     .pipe(tap( resData => {
       console.log(resData);
     }));
