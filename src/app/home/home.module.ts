@@ -15,7 +15,15 @@ import { HomePage } from './home.page';
       {
         path: '',
         component: HomePage
-      }
+      },
+      {
+        path: 'sign-up',
+        loadChildren: () => import('../sign-up/sign-up.module').then( m => m.SignUpPageModule)
+      },
+      {
+        path: 'products',
+        loadChildren: () => import('../products/products.module').then( m => m.ProductsPageModule)
+      },
     ])
   ],
   declarations: [HomePage]

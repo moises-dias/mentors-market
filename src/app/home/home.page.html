@@ -1,20 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
+    <!-- colocar ion-buttons onde você quiser que tenha o menu -->
+    <ion-buttons slot='start'>
+      <ion-menu-button menu='m1'></ion-menu-button>
+      <!-- ou cria um button que chama a menucontroller.open no .ts -->
+    </ion-buttons>
     <ion-title>
-      Blank
+      pedir pra logar / olá usuario
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+
+<ion-content>
+  <!-- routerDirection forward ou backward no ion button -->
+  <ion-button expand="block" routerLink="/products">Produtos e Serviços</ion-button>
+  <ion-button expand="block" onclick="console.log('hi')">Supermercados</ion-button>
+  <ion-button expand="block" routerLink="/new-product">Novo produto</ion-button>
+
+<!-- ESSA BOSTA DESSAS TABS DIEXAM OS BOTOES INATIVOS -->
+  <!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="sign-up">
+        <ion-label>discover</ion-label>
+        <ion-icon name="search"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="products">
+        <ion-label>discover</ion-label>
+        <ion-icon name="search"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs> -->
 </ion-content>

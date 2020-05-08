@@ -1,3 +1,31 @@
+
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <ion-menu side='start' menuId='m1'>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          Mercado Online
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item lines='none'>
+          <ion-icon name='person-outline' slot='start'></ion-icon>
+          <ion-label>Dashboard</ion-label>
+        </ion-item>
+        <ion-item lines='none'>
+          <ion-icon name="chatbubble-outline" slot='start'></ion-icon>
+          <ion-label>Chats</ion-label>
+        </ion-item>
+        <ion-item lines='none'>
+          <ion-icon name='pricetags-outline' slot='start'></ion-icon>
+          <ion-label>Anúncios</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>
