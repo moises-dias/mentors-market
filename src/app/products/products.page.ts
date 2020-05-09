@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ProductsService } from '../products.service';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-products',
@@ -16,11 +17,17 @@ export class ProductsPage implements OnInit {
     private productsService: ProductsService,
     ) { }
 
+    products: Product[] = [];
+    isLoading: boolean = true;
+
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    this.productsService.fetchProducts().subscribe( (prod) => {console.log(prod)});
+    this.productsService.fetchProducts().subscribe((products) => {
+      this.products = products;
+      this.isLoading = false;
+    });
   }
 
   returnFunction() {
