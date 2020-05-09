@@ -20,7 +20,7 @@
           No products found
         </p>
         <ion-list *ngIf="!isLoading && products.length > 0">
-          <ion-item *ngFor="let product of products">
+          <ion-item *ngFor="let product of products" [routerLink]="['/', 'products', 'product-info', product.id]">
             <!-- <ion-avatar slot="start">
               <img src="./avatar-finn.png">
             </ion-avatar> -->

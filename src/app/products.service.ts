@@ -44,4 +44,21 @@ export class ProductsService {
       return products;
     }));
   }
+
+  getProduct(id: string) {
+    return this.http
+      .get<ProductData>(
+        `https://mentors-market.firebaseio.com/products/${id}.json`
+      )
+      .pipe(
+        map(resData => {
+          return new Product(
+            id,
+            resData.title,
+            resData.price,
+            resData.description,
+          );
+        })
+      );
+  }
 }
