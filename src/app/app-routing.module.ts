@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'new-product',
     loadChildren: () => import('./new-product/new-product.module').then( m => m.NewProductPageModule)
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
+  },
   { 
     path: '404', 
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
@@ -27,7 +31,7 @@ const routes: Routes = [
   { 
     path: '**', 
     redirectTo: '404' 
-  }
+  },
 ];
 
 @NgModule({
