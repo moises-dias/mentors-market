@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 import { map, tap } from 'rxjs/operators';
+import { Plugins } from '@capacitor/core';
 
 export interface AuthResponseData {
   kind: string;
@@ -77,4 +78,12 @@ export class AuthService {
       )
     );
   }
+
+  private storeAuthData(
+    userId: string,
+    token: string,
+    tokenExpirationDate: string
+  ) {
+
+  };
 }
