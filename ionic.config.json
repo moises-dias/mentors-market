@@ -1,5 +1,7 @@
 {
   "name": "mentors-market",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
