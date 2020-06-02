@@ -42,6 +42,10 @@ export class NewProductPage implements OnInit {
     this.productsService.fetchProducts().subscribe();
   }
 
+  onImagePicked(imageData: string) {
+
+  }
+
 
 
 }

@@ -34,6 +34,13 @@
       </ion-row>
     </ion-grid>
   </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <app-image-picker (imagePick)="onImagePicked($event)"></app-image-picker>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-button (click)='callme()'>Finish</ion-button>
   <!-- *ngIf="form.get('description').valid" touched -->
   <!-- [disabled]='!form.valid' -->
