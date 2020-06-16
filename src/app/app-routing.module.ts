@@ -17,10 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./products/products.module').then( m => m.ProductsPageModule),
     // canLoad: [AuthGuard]
   },
-  {
-    path: 'product-info',
-    loadChildren: () => import('./product-info/product-info.module').then( m => m.ProductInfoPageModule)
-  },
+  // {
+  //   path: 'product-info',
+  //   loadChildren: () => import('./product-info/product-info.module').then( m => m.ProductInfoPageModule)
+  // },
   {
     path: 'new-product',
     loadChildren: () => import('./new-product/new-product.module').then( m => m.NewProductPageModule)
@@ -33,14 +33,14 @@ const routes: Routes = [
     path: 'chats-list',
     loadChildren: () => import('./chats-list/chats-list.module').then( m => m.ChatsListPageModule)
   },
-  { 
-    path: '404', 
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
-  },
-  { 
-    path: '**', 
-    redirectTo: '404' 
-  },
+  // { 
+  //   path: '404', 
+  //   loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
+  // },
+  // { 
+  //   path: '**', 
+  //   redirectTo: '404' 
+  // },
 ];
 
 @NgModule({

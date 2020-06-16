@@ -5,8 +5,10 @@ import * as firebase from 'firebase/app';
 import { take, map, tap, delay, switchMap, mergeMap } from 'rxjs/operators';
 import { timer, combineLatest } from 'rxjs';
 export interface Test { test: string; title: string; }
-export interface Message { user: string; message: string; date: string }
-export interface Chat { buyer: string; seller: string; messages: Message[] }
+// export interface Message { user: string; message: string; date: string }
+// export interface Chat { buyer: string; seller: string; messages: Message[] }
+import { Chat } from './chat.model';
+
 
 // get com condição
 // this.items = firestore.collection("products", ref => ref.where("test", "==", "test")).snapshotChanges()
@@ -56,8 +58,9 @@ export class FirebaseService {
           const [buyerChats, sellerChats] = chats;
           const combined = buyerChats.concat(sellerChats)
           .map(chat => {
-            const data = chat.payload.doc.data() as Message;
+            const data = chat.payload.doc.data() as Chat;
             const id = chat.payload.doc.id;
+            console.log("what is that?")
             console.log({ id, ...data});
             return { id, ...data};
           });
