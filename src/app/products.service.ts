@@ -8,6 +8,7 @@ interface ProductData {
   price: string;
   description: string;
   image: string;
+  vendor: string;
 }
 
 @Injectable({
@@ -17,9 +18,9 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  addProduct(title: string, price: string, description: string, image: string){
+  addProduct(title: string, price: string, description: string, image: string, vendor: string){
     console.log('here');
-    const newProduct = new Product('', title, price, description, image);
+    const newProduct = new Product('', title, price, description, image, vendor);
     return this.http.post<{name: string}>('https://mentors-market.firebaseio.com/products.json', {...newProduct, id: null })
     .pipe(tap( resData => {
       console.log(resData);
@@ -40,7 +41,8 @@ export class ProductsService {
               resData[key].title,
               resData[key].price,
               resData[key].description,
-              resData[key].image
+              resData[key].image,
+              resData[key].vendor
             )
           );
         };
@@ -62,7 +64,8 @@ export class ProductsService {
             resData.title,
             resData.price,
             resData.description,
-            resData.image
+            resData.image,
+            resData.vendor
           );
         })
       );

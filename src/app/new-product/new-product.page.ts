@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../products.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-new-product',
@@ -11,7 +12,10 @@ export class NewProductPage implements OnInit {
   form: FormGroup;
   image: string;
 
-  constructor(private productsService: ProductsService) { }
+  constructor(
+    private productsService: ProductsService,
+    private userService: UserService,
+    ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -37,7 +41,8 @@ export class NewProductPage implements OnInit {
       this.form.value.title,
       this.form.value.price,
       this.form.value.description,
-      this.image).subscribe(() => {
+      this.image,
+      this.userService.getUsrMail()).subscribe(() => {
         this.form.reset();
         console.log('also here');
       });
