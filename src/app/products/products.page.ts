@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { take, map, tap, delay, switchMap } from 'rxjs/operators';
 import { FirebaseService } from '../firebase.service';
+import { UserService } from '../user.service';
 
 
 export interface Test { test: string; title: string; }
@@ -20,14 +21,15 @@ export interface Test { test: string; title: string; }
 export class ProductsPage implements OnInit {
   items: Observable<any[]>;
   chats;
-  msgs;
+  msgs: Observable<any>;
 
   constructor(
     private router: Router, 
     private navCtrl: NavController,
     private productsService: ProductsService,
-    firestore: AngularFirestore,
-    private firebaseService: FirebaseService
+    private firestore: AngularFirestore,
+    private firebaseService: FirebaseService,
+    private userService: UserService
     ) { 
       
       this.items = firestore.collection("products").snapshotChanges()
@@ -35,10 +37,9 @@ export class ProductsPage implements OnInit {
         return resData.map(a => {
           const data = a.payload.doc.data() as Test;
           const id = a.payload.doc.id;
-          // console.log({id, ...data});
+          console.log({id, ...data});
           return { id, ...data};
         })
-
       }));
       
     }
@@ -57,7 +58,8 @@ export class ProductsPage implements OnInit {
       this.products = products;
       this.isLoading = false;
     });
-    this.firebaseService.getAllChats().subscribe(chat => console.log(chat));
+    this.firebaseService.getAllChats(this.userService.getUsrMail()).subscribe(chat => console.log(chat));
+
   }
 
   returnFunction() {
@@ -65,7 +67,7 @@ export class ProductsPage implements OnInit {
 
 
     // this.navCtrl.navigateBack('/home');
-    this.firebaseService.newMessage('ZaTv5KVuVeeECQ6oHgxc', 'jose', 'ola tudo bem?', '1234456');
+    this.firebaseService.newMessage('gm0yE4KSBrI9CDUm5kl8', 'jose', 'ola tudo bem?', '1234456');
   }
 
 }

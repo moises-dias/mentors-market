@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../firebase.service';
+import { UserService } from '../user.service';
+import { Chat } from '../chat.model';
 
 @Component({
   selector: 'app-chats-list',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatsListPage implements OnInit {
 
-  constructor() { }
+  chatsList: Chat[];
+  constructor(
+    private firebaseService: FirebaseService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
+  }
+  ionViewWillEnter() {
+    // this.firebaseService.getAllChats(this.userService.getUsrMail()).subscribe(chat => this.chatsList = chat);
+
   }
 
 }

@@ -44,18 +44,17 @@ export class FirebaseService {
 
   }
 
-  getAllChats() {
-    //passar usr como parametro
+  getAllChats(usr: string) {
 
-    const californiaRef = this.firestore
-      .collection("products", ref => ref.where("title","==","first"));
-    const coloradoRef = this.firestore
-      .collection("products", ref => ref.where("title","==","second"));
+    const buyer = this.firestore
+      .collection("chats", ref => ref.where("buyer","==",usr));
+    const seller = this.firestore
+      .collection("chats", ref => ref.where("seller","==",usr));
 
-    return combineLatest([californiaRef.snapshotChanges(), coloradoRef.snapshotChanges()]).pipe(
-      mergeMap(cities => {
-          const [californiaCities, coloradoCities] = cities;
-          const combined = californiaCities.concat(coloradoCities)
+    return combineLatest([buyer.snapshotChanges(), seller.snapshotChanges()]).pipe(
+      mergeMap(chats => {
+          const [buyerChats, sellerChats] = chats;
+          const combined = buyerChats.concat(sellerChats)
           .map(chat => {
             const data = chat.payload.doc.data() as Message;
             const id = chat.payload.doc.id;
