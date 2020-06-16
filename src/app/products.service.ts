@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from './product.model';
 import { take, map, tap, delay, switchMap } from 'rxjs/operators';
 
@@ -7,6 +7,7 @@ interface ProductData {
   title: string;
   price: string;
   description: string;
+  image: string;
 }
 
 @Injectable({
@@ -16,9 +17,9 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  addProduct(title: string, price: string, description: string){
+  addProduct(title: string, price: string, description: string, image: string){
     console.log('here');
-    const newProduct = new Product('', title, price, description);
+    const newProduct = new Product('', title, price, description, image);
     return this.http.post<{name: string}>('https://mentors-market.firebaseio.com/products.json', {...newProduct, id: null })
     .pipe(tap( resData => {
       console.log(resData);
@@ -27,7 +28,9 @@ export class ProductsService {
 
   fetchProducts() {
     return this.http.get<{ [key: string]: ProductData }>('https://mentors-market.firebaseio.com/products.json')
+    // return this.http.get<{ [key: string]: ProductData }>('https://mentors-market.firebaseio.com/products.json?orderBy="description"&equalTo=123')
     .pipe(map( resData => {
+      console.log(resData);
       const products = [];
       for (const key in resData) {
         if (resData.hasOwnProperty(key)) {
@@ -36,11 +39,13 @@ export class ProductsService {
               key,
               resData[key].title,
               resData[key].price,
-              resData[key].description
+              resData[key].description,
+              resData[key].image
             )
           );
         };
       };
+      console.log(products)
       return products;
     }));
   }
@@ -57,6 +62,7 @@ export class ProductsService {
             resData.title,
             resData.price,
             resData.description,
+            resData.image
           );
         })
       );

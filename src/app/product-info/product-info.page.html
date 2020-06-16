@@ -16,6 +16,10 @@
       <h2>{{ product.title }}</h2>
       <h3>{{ product.price | currency}}</h3>
       <p>{{ product.description }}</p>
+      <ion-img class="image"
+               [src]=" 'data:image/png;base64,' + product.image"
+               *ngIf="product.image">
+      </ion-img>
     </ion-label>
   </ion-item>
 </ion-content>

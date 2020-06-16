@@ -9,6 +9,7 @@ import { ProductsService } from '../products.service';
 })
 export class NewProductPage implements OnInit {
   form: FormGroup;
+  image: string;
 
   constructor(private productsService: ProductsService) { }
 
@@ -35,7 +36,8 @@ export class NewProductPage implements OnInit {
     this.productsService.addProduct(
       this.form.value.title,
       this.form.value.price,
-      this.form.value.description).subscribe(() => {
+      this.form.value.description,
+      this.image).subscribe(() => {
         this.form.reset();
         console.log('also here');
       });
@@ -43,7 +45,7 @@ export class NewProductPage implements OnInit {
   }
 
   onImagePicked(imageData: string) {
-
+    this.image = imageData;
   }
 
 

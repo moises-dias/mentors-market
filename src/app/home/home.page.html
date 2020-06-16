@@ -17,7 +17,8 @@
 <ion-content>
   <!-- routerDirection forward ou backward no ion button -->
   <ion-button expand="block" routerLink="/products">Produtos e Serviços</ion-button>
-  <ion-button expand="block" onclick="console.log('hi')">Supermercados</ion-button>
+  <!-- <ion-button expand="block" onclick="console.log('hi')">Supermercados</ion-button> -->
+  <ion-button expand="block" (click)='openMenu()'>Supermercados</ion-button>
   <ion-button expand="block" routerLink="/new-product">Novo produto</ion-button>
 
 <!-- ESSA BOSTA DESSAS TABS DIEXAM OS BOTOES INATIVOS -->

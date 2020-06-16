@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "mentors-market": {
+      "hosting": {
+        "app": [
+          "mentors-market"
+        ]
+      }
+    }
+  }
+}
