@@ -24,6 +24,10 @@ import { HomePage } from './home.page';
         path: 'products',
         loadChildren: () => import('../products/products.module').then( m => m.ProductsPageModule)
       },
+      {
+        path: 'chats-list',
+        loadChildren: () => import('../chats-list/chats-list.module').then( m => m.ChatsListPageModule)
+      },
     ])
   ],
   declarations: [HomePage]

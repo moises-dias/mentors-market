@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from './product.model';
 import { take, map, tap, delay, switchMap } from 'rxjs/operators';
 
+
 interface ProductData {
   title: string;
   price: string;
@@ -28,6 +29,7 @@ export class ProductsService {
   }
 
   fetchProducts() {
+    console.log("fetching")
     return this.http.get<{ [key: string]: ProductData }>('https://mentors-market.firebaseio.com/products.json')
     // return this.http.get<{ [key: string]: ProductData }>('https://mentors-market.firebaseio.com/products.json?orderBy="description"&equalTo=123')
     .pipe(map( resData => {
