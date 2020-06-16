@@ -7,6 +7,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { take, map, tap, delay, switchMap } from 'rxjs/operators';
+import { FirebaseService } from '../firebase.service';
+
+
 export interface Test { test: string; title: string; }
 
 @Component({
@@ -16,31 +19,28 @@ export interface Test { test: string; title: string; }
 })
 export class ProductsPage implements OnInit {
   items: Observable<any[]>;
+  chats;
+  msgs;
 
   constructor(
     private router: Router, 
     private navCtrl: NavController,
     private productsService: ProductsService,
-    firestore: AngularFirestore
+    firestore: AngularFirestore,
+    private firebaseService: FirebaseService
     ) { 
-      // this.items = firestore.collection("products", ref => ref.where("test", "==", "test")).snapshotChanges()
+      
       this.items = firestore.collection("products").snapshotChanges()
       .pipe(map( resData => {
         return resData.map(a => {
           const data = a.payload.doc.data() as Test;
           const id = a.payload.doc.id;
-          console.log({id, ...data});
+          // console.log({id, ...data});
           return { id, ...data};
         })
 
       }));
-      // this.items = firestore.collection("products/id1").valueChanges();
-      console.log('on products')
-      firestore.collection('products').doc("RdnpcSDAfj3cpOVb3B6H").update({test: 'AAAA'})
-      firestore.collection('products').doc("id2").update({
-        dfadf:
-        firebase.firestore.FieldValue.arrayUnion({asdf: "efee", dfdff: "afffaa"})
-      });
+      
     }
 
     products: Product[] = [];
@@ -49,6 +49,7 @@ export class ProductsPage implements OnInit {
 
   ngOnInit() {
     // console.log(firebase.auth().currentUser.email);
+    // firestore.collection('products').doc("RdnpcSDAfj3cpOVb3B6H").update({test: 'AAAA'})
   }
 
   ionViewWillEnter() {
@@ -56,11 +57,15 @@ export class ProductsPage implements OnInit {
       this.products = products;
       this.isLoading = false;
     });
+    this.firebaseService.getAllChats().subscribe(chat => console.log(chat));
   }
 
   returnFunction() {
     // this.router.navigateByUrl('/home');
-    this.navCtrl.navigateBack('/home');
+
+
+    // this.navCtrl.navigateBack('/home');
+    this.firebaseService.newMessage('ZaTv5KVuVeeECQ6oHgxc', 'jose', 'ola tudo bem?', '1234456');
   }
 
 }

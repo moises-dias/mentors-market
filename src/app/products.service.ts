@@ -29,11 +29,9 @@ export class ProductsService {
   }
 
   fetchProducts() {
-    console.log("fetching")
     return this.http.get<{ [key: string]: ProductData }>('https://mentors-market.firebaseio.com/products.json')
     // return this.http.get<{ [key: string]: ProductData }>('https://mentors-market.firebaseio.com/products.json?orderBy="description"&equalTo=123')
     .pipe(map( resData => {
-      console.log(resData);
       const products = [];
       for (const key in resData) {
         if (resData.hasOwnProperty(key)) {
