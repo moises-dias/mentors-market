@@ -4,7 +4,7 @@ import { Observable, Subject, of } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { take, map, tap, delay, switchMap, mergeMap } from 'rxjs/operators';
 import { timer, combineLatest } from 'rxjs';
-export interface Test { buyer: string; messages: Array<any>; seller: string }
+export interface Test { test: string; title: string; }
 // export interface Message { user: string; message: string; date: string }
 // export interface Chat { buyer: string; seller: string; messages: Message[] }
 import { Chat } from './chat.model';
@@ -40,16 +40,9 @@ export class FirebaseService {
     });
   }
 
-  getMessages(id: string) {
+  getMessages() {
     //passar id msgs como parametro
-    return this.firestore.collection("chats").doc(id).snapshotChanges()
-    .pipe(
-      map( res => {
-        console.log(res.payload.data());
-        const data = res.payload.data() as Test;
-        return data.messages;
-      })
-    );
+    return this.firestore.collection("products").doc("id2");
 
   }
 

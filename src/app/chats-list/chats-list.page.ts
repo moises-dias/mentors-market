@@ -22,6 +22,5 @@ export class ChatsListPage implements OnInit {
   }
   ionViewWillEnter() {
     this.chats = this.firebaseService.getAllChats(this.userService.getUsrMail());
-    // console.log(this.firebaseService.getMessages('dfsdf'));
   }
 }
