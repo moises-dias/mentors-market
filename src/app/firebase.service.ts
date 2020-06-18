@@ -27,7 +27,7 @@ import { Chat } from './chat.model';
 })
 export class FirebaseService {
 
-  chats: Chat[];
+  // chats: Chat[];
 
   constructor(
     private firestore: AngularFirestore
@@ -47,7 +47,7 @@ export class FirebaseService {
       map( res => {
         console.log(res.payload.data());
         const data = res.payload.data() as Test;
-        return data.messages;
+        return data;
       })
     );
 
