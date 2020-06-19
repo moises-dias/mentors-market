@@ -41,6 +41,17 @@ export class FirebaseService {
     });
   }
 
+  getProduct(id: string) {
+    return this.firestore.collection("products").doc(id).snapshotChanges()
+    .pipe(
+      map( res => {
+        console.log(res.payload.data());
+        const data = res.payload.data() as Newproduct;
+        return data;
+      })
+    )
+  }
+
   getMessages(id: string) {
     //passar id msgs como parametro
     return this.firestore.collection("chats").doc(id).snapshotChanges()

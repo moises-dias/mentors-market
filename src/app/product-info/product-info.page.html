@@ -8,22 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides [pager]="true" *ngIf="!isLoading">
-		<ion-slide>
+  <ion-slides [pager]="true" *ngIf="product.images.length > 0">
+		<ion-slide *ngFor="let image of product.images">
 			<ion-img class="image"
-               [src]=" 'data:image/png;base64,' + product.image"
-               *ngIf="product.image">
+               [src]=" 'data:image/png;base64,' + image">
       </ion-img>
-		</ion-slide>
-		<ion-slide>
-			<h1>Slide 2</h1>
-		</ion-slide>
-		<ion-slide>
-			<h1>Slide x</h1>
-		</ion-slide>
-    
+    </ion-slide> 
 	</ion-slides>
-  <ion-item *ngIf="!isLoading">
+  <ion-item>
+  <!-- <ion-item *ngIf="!isLoading"> -->
     <!-- <ion-avatar slot="start">
       <img src="./avatar-finn.png">
     </ion-avatar> -->
@@ -31,10 +24,10 @@
       <h2>{{ product.title }}</h2>
       <h3>{{ product.price | currency}}</h3>
       <p>{{ product.description }}</p>
-      <ion-img class="image"
+      <!-- <ion-img class="image"
                [src]=" 'data:image/png;base64,' + product.image"
                *ngIf="product.image">
-      </ion-img>
+      </ion-img> -->
     </ion-label>
   </ion-item>
   <ion-button>chat com vendedor</ion-button>
