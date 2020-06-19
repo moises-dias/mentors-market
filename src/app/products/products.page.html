@@ -31,18 +31,23 @@
           No products found
         </p>
         <ion-list *ngIf="!isLoading && products.length > 0">
-          <ion-item *ngFor="let product of products" [routerLink]="['/', 'products', 'product-info', product.id]">
+          <ion-item *ngFor="let product of products" 
+                    [routerLink]="['/', 'products', 'product-info', product.id]">
             <!-- <ion-avatar slot="start">
               <img src="./avatar-finn.png">
             </ion-avatar> -->
+            <ion-thumbnail slot="start">
+              <ion-img [src]=" 'data:image/png;base64,' + product.image"
+                       *ngIf="product.image"></ion-img>
+            </ion-thumbnail>
             <ion-label>
               <h2>{{ product.title }}</h2>
               <h3>{{ product.price | currency}}</h3>
               <p>{{ product.description }}</p>
-              <ion-img class="image"
+              <!-- <ion-img class="image"
                        [src]=" 'data:image/png;base64,' + product.image"
                        *ngIf="product.image">
-              </ion-img>
+              </ion-img> -->
             </ion-label>
           </ion-item>
         </ion-list>

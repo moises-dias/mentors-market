@@ -8,6 +8,21 @@
 </ion-header>
 
 <ion-content>
+  <ion-slides [pager]="true" *ngIf="!isLoading">
+		<ion-slide>
+			<ion-img class="image"
+               [src]=" 'data:image/png;base64,' + product.image"
+               *ngIf="product.image">
+      </ion-img>
+		</ion-slide>
+		<ion-slide>
+			<h1>Slide 2</h1>
+		</ion-slide>
+		<ion-slide>
+			<h1>Slide x</h1>
+		</ion-slide>
+    
+	</ion-slides>
   <ion-item *ngIf="!isLoading">
     <!-- <ion-avatar slot="start">
       <img src="./avatar-finn.png">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../products.service';
+import { FirebaseService } from '../firebase.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -10,11 +11,12 @@ import { UserService } from '../user.service';
 })
 export class NewProductPage implements OnInit {
   form: FormGroup;
-  image: string;
+  images: string[] = [];
 
   constructor(
     private productsService: ProductsService,
     private userService: UserService,
+    private firebaseService: FirebaseService
     ) { }
 
   ngOnInit() {
@@ -33,24 +35,38 @@ export class NewProductPage implements OnInit {
       })
 
     });
+    // console.log("AAAAAAAAA", this.firebaseService.getProducts());
+
   }
 
   callme() {
-    console.log(this.form);
-    this.productsService.addProduct(
+    // console.log(this.form);
+    // this.productsService.addProduct(
+    //   this.form.value.title,
+    //   this.form.value.price,
+    //   this.form.value.description,
+    //   "this.images",
+    //   // arrumar aqui, tirar as aspas
+    //   this.userService.getUsrMail()).subscribe(() => {
+    //     this.form.reset();
+    //     console.log('also here');
+    //   });
+    // this.productsService.fetchProducts().subscribe();
+    this.firebaseService.newProduct(
       this.form.value.title,
+      this.userService.getUsrMail(),
       this.form.value.price,
       this.form.value.description,
-      this.image,
-      this.userService.getUsrMail()).subscribe(() => {
-        this.form.reset();
-        console.log('also here');
-      });
-    this.productsService.fetchProducts().subscribe();
+      this.images
+    );
+    this.form.reset();
+
+
+
   }
 
   onImagePicked(imageData: string) {
-    this.image = imageData;
+    this.images.push(imageData);
   }
 
 

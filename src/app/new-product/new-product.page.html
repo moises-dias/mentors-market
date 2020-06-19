@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- [formGroup]='form' -->
   <form [formGroup]='form'>
     <ion-grid>
       <ion-row>
@@ -41,6 +40,13 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-slides [pager]="true" *ngIf="images.length > 0">
+		<ion-slide *ngFor="let image of images">
+			<ion-img class="image"
+               [src]=" 'data:image/png;base64,' + image">
+      </ion-img>
+		</ion-slide> 
+	</ion-slides>
   <ion-button (click)='callme()'>Finish</ion-button>
   <!-- *ngIf="form.get('description').valid" touched -->
   <!-- [disabled]='!form.valid' -->

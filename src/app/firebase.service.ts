@@ -8,6 +8,7 @@ export interface Test { buyer: string; messages: Array<any>; seller: string }
 // export interface Message { user: string; message: string; date: string }
 // export interface Chat { buyer: string; seller: string; messages: Message[] }
 import { Chat } from './chat.model';
+import { Newproduct } from './newproduct.model';
 
 
 // get com condição
@@ -53,8 +54,22 @@ export class FirebaseService {
 
   }
 
-  getAllChats(usr: string) {
+  getProducts() {
+    console.log('test')
+    return this.firestore.collection('products').snapshotChanges()
+    .pipe(
+      map( res => {
+        return res.map( a => {
+          const data = a.payload.doc.data() as Newproduct; 
+          const id = a.payload.doc.id;
+          console.log({ id, ...data })
+          return { id, ...data };
+        })
+      })
+    )
+  }
 
+  getAllChats(usr: string) {
     const buyer = this.firestore
       .collection("chats", ref => ref.where("buyer","==",usr));
     const seller = this.firestore
@@ -67,14 +82,23 @@ export class FirebaseService {
           .map(chat => {
             const data = chat.payload.doc.data() as Chat;
             const id = chat.payload.doc.id;
-            console.log("what is that?")
             console.log({ id, ...data});
             return { id, ...data};
           });
-          console.log("combined")
           console.log(combined);
           return of(combined);
       })
     )
   }
+
+  newProduct (title: string, vendor: string, price: number, description: string, images: string[]) {
+    this.firestore.collection('products').add({
+      title: title,
+      vendor: vendor,
+      price: price,
+      description: description,
+      images: images
+    })
+  }
+
 }

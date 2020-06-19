@@ -9,6 +9,7 @@ import * as firebase from 'firebase/app';
 import { take, map, tap, delay, switchMap } from 'rxjs/operators';
 import { FirebaseService } from '../firebase.service';
 import { UserService } from '../user.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 export interface Test { test: string; title: string; }
@@ -19,7 +20,7 @@ export interface Test { test: string; title: string; }
   styleUrls: ['./products.page.scss'],
 })
 export class ProductsPage implements OnInit {
-  items: Observable<any[]>;
+  items: Observable<any>;
   chats;
   msgs: Observable<any>;
 
@@ -32,15 +33,17 @@ export class ProductsPage implements OnInit {
     private userService: UserService
     ) { 
       
-      this.items = firestore.collection("products").snapshotChanges()
-      .pipe(map( resData => {
-        return resData.map(a => {
-          const data = a.payload.doc.data() as Test;
-          const id = a.payload.doc.id;
-          console.log({id, ...data});
-          return { id, ...data};
-        })
-      }));
+      // this.items = firestore.collection("products").snapshotChanges()
+      // .pipe(map( resData => {
+      //   return resData.map(a => {
+      //     const data = a.payload.doc.data() as Test;
+      //     const id = a.payload.doc.id;
+      //     console.log({id, ...data});
+      //     return { id, ...data};
+      //   })
+      // }));
+      this.items = this.firebaseService.getProducts();
+      console.log(this.items);
       
     }
 
@@ -49,6 +52,8 @@ export class ProductsPage implements OnInit {
     
 
   ngOnInit() {
+    // this.firebaseService.getProducts().subscribe(item => console.log(item));
+    // console.log(this.items)
     // console.log(firebase.auth().currentUser.email);
     // firestore.collection('products').doc("RdnpcSDAfj3cpOVb3B6H").update({test: 'AAAA'})
   }
