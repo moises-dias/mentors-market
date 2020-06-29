@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanL
 import { Observable } from 'rxjs';
 import { Route } from '@angular/compiler/src/core';
 import { AuthService } from './auth.service';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,19 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanLoad {
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
     ) {}
 
   canLoad(
     route: Route,
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
-    // if(true){
-    //   this.router.navigateByUrl('/auth');
-    // }
-    return false;
+    if(this.userService.getUsrMail() === ""){
+      this.router.navigateByUrl('/products');
+      return true;
+    }
+    return true;
     // return false;
 
   }

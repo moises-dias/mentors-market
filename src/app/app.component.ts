@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { Plugins, Capacitor} from '@capacitor/core';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,23 @@ import { Plugins, Capacitor} from '@capacitor/core';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  userMail: string = '';
+
   constructor(
     private platform: Platform,
-    private menu: MenuController
+    private menu: MenuController,
+    private userService: UserService,
   ) {
     this.initializeApp();
+    this.userService.getUsrMail$().subscribe((value) => {
+      this.userMail = value;
+    })
+  }
+
+
+  close() {
+    console.log("test");
+    this.menu.close();
   }
 
   initializeApp() {

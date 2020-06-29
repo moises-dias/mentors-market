@@ -6,13 +6,16 @@ import { UserService } from '../user.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  userMail: string = '';
   
   constructor(
     private userService: UserService
   ) {}
   openMenu() {
     console.log(this.userService.getUsrMail());
+  }
+  ionViewWillEnter() {
+    this.userMail = this.userService.getUsrMail();
   }
 
 }

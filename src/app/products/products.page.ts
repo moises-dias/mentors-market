@@ -23,6 +23,7 @@ export class ProductsPage implements OnInit {
   items: Observable<any>;
   chats;
   msgs: Observable<any>;
+  usrMail: string = "";
 
   constructor(
     private router: Router, 
@@ -64,7 +65,7 @@ export class ProductsPage implements OnInit {
       this.isLoading = false;
     });
     this.firebaseService.getAllChats(this.userService.getUsrMail()).subscribe(chat => console.log(chat));
-
+    this.usrMail = this.userService.getUsrMail();
   }
 
   returnFunction() {

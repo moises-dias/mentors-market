@@ -5,24 +5,45 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>
-          Mercado Online
+          {{this.userMail ? "Olá "+ this.userMail : "Acesse sua conta"}}
         </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item lines='none'>
+        <ion-item *ngIf="!this.userMail;else userOptions"
+                  lines='none'
+                  (click)="close()"
+                  [routerLink]="['/', 'auth']">
           <ion-icon name='person-outline' slot='start'></ion-icon>
-          <ion-label>Dashboard</ion-label>
+          <ion-label>Acessar conta</ion-label>
         </ion-item>
-        <ion-item lines='none'>
+        <ng-template #userOptions>
+
+        <ion-item lines='none'
+                  (click)="close()"
+                  [routerLink]="['/', 'new-product']">
+          <ion-icon name='add-outline' slot='start'></ion-icon>
+          <ion-label>Anunciar um produto</ion-label>
+        </ion-item>
+
+        <ion-item lines='none'
+                  (click)="close()"
+                  [routerLink]="['/', 'chats-list']">
           <ion-icon name="chatbubble-outline" slot='start'></ion-icon>
-          <ion-label>Chats</ion-label>
+          <ion-label>Conversas</ion-label>
         </ion-item>
+
         <ion-item lines='none'>
-          <ion-icon name='pricetags-outline' slot='start'></ion-icon>
-          <ion-label>Anúncios</ion-label>
+          <ion-icon name='cart-outline' slot='start'></ion-icon>
+          <ion-label>Histórico de compras</ion-label>
         </ion-item>
+        
+        <ion-item lines='none'>
+          <ion-icon name='bookmarks-outline' slot='start'></ion-icon>
+          <ion-label>Vouchers</ion-label>
+        </ion-item>
+      </ng-template>
       </ion-list>
     </ion-content>
 

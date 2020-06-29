@@ -46,7 +46,7 @@ export class AuthPage implements OnInit {
           this.userService.setUsrMail(email);
           this.isLoading = false;
           loadingEl.dismiss();
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/products');
         }, errRes => {
           loadingEl.dismiss();
           const code = errRes.error.error.message;

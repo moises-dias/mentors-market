@@ -1,9 +1,21 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot='start'>
       <ion-back-button defaultHref='/home'></ion-back-button>
     </ion-buttons>
     <ion-title>products</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <ion-toolbar>
+    <!-- colocar ion-buttons onde você quiser que tenha o menu -->
+    <ion-buttons slot='start'>
+      <ion-menu-button menu='m1'></ion-menu-button>
+      <!-- ou cria um button que chama a menucontroller.open no .ts -->
+    </ion-buttons>
+    <ion-title>
+      {{this.usrMail? "Olá "+this.usrMail : "Bem-vindo ao EasyMarket"}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
