@@ -16,13 +16,14 @@ export class ProductInfoPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productsService: ProductsService,
     private firebaseService: FirebaseService,
     private userService: UserService,
   ) { }
   
   product: Newproduct = {title: '', price: '', description: '', images: [], vendor: ''};
-
+  userMail: string = '';
   isLoading: boolean = true;
 
   ngOnInit() {
@@ -41,6 +42,18 @@ export class ProductInfoPage implements OnInit {
             console.log(product)
           }
         );
+    });
+  }
+
+  ionViewWillEnter() {
+    this.userMail = this.userService.getUsrMail();
+  }
+
+  call() {
+    this.firebaseService.newChat(this.product.title, this.userService.getUsrMail(), this.product.vendor)
+    .then((value) => {
+      console.log(value.id);
+      this.router.navigateByUrl("/chats-list/chat/"+value.id);
     });
   }
 

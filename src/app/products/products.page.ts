@@ -44,7 +44,7 @@ export class ProductsPage implements OnInit {
       //   })
       // }));
       this.items = this.firebaseService.getProducts();
-      console.log(this.items);
+      console.log("items "+ this.items);
       
     }
 
@@ -66,14 +66,6 @@ export class ProductsPage implements OnInit {
     });
     this.firebaseService.getAllChats(this.userService.getUsrMail()).subscribe(chat => console.log(chat));
     this.usrMail = this.userService.getUsrMail();
-  }
-
-  returnFunction() {
-    // this.router.navigateByUrl('/home');
-
-
-    // this.navCtrl.navigateBack('/home');
-    this.firebaseService.newMessage('gm0yE4KSBrI9CDUm5kl8', 'jose', 'ola tudo bem?', '1234456');
   }
 
 }

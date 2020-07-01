@@ -1,17 +1,7 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot='start'>
-      <ion-back-button defaultHref='/home'></ion-back-button>
-    </ion-buttons>
-    <ion-title>products</ion-title>
-  </ion-toolbar>
-</ion-header> -->
 <ion-header>
   <ion-toolbar>
-    <!-- colocar ion-buttons onde você quiser que tenha o menu -->
     <ion-buttons slot='start'>
       <ion-menu-button menu='m1'></ion-menu-button>
-      <!-- ou cria um button que chama a menucontroller.open no .ts -->
     </ion-buttons>
     <ion-title>
       {{this.usrMail? "Olá "+this.usrMail : "Bem-vindo ao EasyMarket"}}
@@ -20,18 +10,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)='returnFunction()'>back</ion-button>
-  
-  <ul>
-    <li class="text" *ngFor="let item of items | async">
-      {{item.title}}
-    </li>
-  </ul>
-  <!-- <ul>
-    <li class="text" *ngFor="let item of msgs | async">
-      {{item}}
-    </li>
-  </ul> -->
 
   <ion-grid>
     <ion-row>
@@ -39,7 +17,7 @@
         <div class='ion-text-center' *ngIf="isLoading">
           <ion-spinner></ion-spinner>
         </div>
-        <p class='ion-text-center' *ngIf="!isLoading && products.length == 0">
+        <p class='ion-text-center' *ngIf="!isLoading && (items | async)?.length==0">
           No products found
         </p>
         <!-- <ion-list *ngIf="!isLoading && products.length > 0"> -->
@@ -47,20 +25,16 @@
           <ion-item *ngFor="let item of items | async" 
                     [routerLink]="['/', 'products', 'product-info', item.id]">
             <!-- <ion-avatar slot="start">
-              <img src="./avatar-finn.png">
+              <img [src]=" 'data:image/png;base64,' + item.images[0]">
             </ion-avatar> -->
             <ion-thumbnail slot="start">
               <ion-img [src]=" 'data:image/png;base64,' + item.images[0]"
                        ></ion-img>
             </ion-thumbnail>
             <ion-label>
-              <h2>{{ item.title }}</h2>
-              <h3>{{ item.price | currency}}</h3>
-              <p>{{ item.description }}</p>
-              <!-- <ion-img class="image"
-                       [src]=" 'data:image/png;base64,' + product.image"
-                       *ngIf="product.image">
-              </ion-img> -->
+              <h1>{{ item.title }}</h1>
+              <h2>{{ item.price | currency}}</h2>
+              <!-- <p>{{ item.description }}</p> -->
             </ion-label>
           </ion-item>
         </ion-list>

@@ -13,6 +13,7 @@ export class ChatsListPage implements OnInit {
 
   chatsList: Chat[];
   chats: Observable<any[]>;
+  userMail: string = '';
   constructor(
     private firebaseService: FirebaseService,
     private userService: UserService
@@ -21,6 +22,7 @@ export class ChatsListPage implements OnInit {
   ngOnInit() {
   }
   ionViewWillEnter() {
+    this.userMail = this.userService.getUsrMail();
     this.chats = this.firebaseService.getAllChats(this.userService.getUsrMail());
     // console.log(this.firebaseService.getMessages('dfsdf'));
   }

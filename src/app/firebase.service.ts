@@ -4,7 +4,7 @@ import { Observable, Subject, of } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { take, map, tap, delay, switchMap, mergeMap } from 'rxjs/operators';
 import { timer, combineLatest } from 'rxjs';
-export interface Test { buyer: string; messages: Array<any>; seller: string }
+export interface Test { buyer: string; product: string; messages: Array<any>; seller: string }
 // export interface Message { user: string; message: string; date: string }
 // export interface Chat { buyer: string; seller: string; messages: Message[] }
 import { Chat } from './chat.model';
@@ -109,6 +109,15 @@ export class FirebaseService {
       price: price,
       description: description,
       images: images
+    })
+  }
+
+  newChat (product: string, buyer: string, seller: string) {
+    return this.firestore.collection('chats').add({
+      product: product,
+      buyer: buyer,
+      seller: seller,
+      messages: [{user: buyer, message: "Olá " + seller + ", estou interessado em " + product, date: new Date().getTime().toString()}],
     })
   }
 

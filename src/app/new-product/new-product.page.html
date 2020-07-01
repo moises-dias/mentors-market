@@ -3,7 +3,7 @@
     <ion-buttons slot='start'>
       <ion-back-button defaultHref='/home'></ion-back-button>
     </ion-buttons>
-    <ion-title>newProduct</ion-title>
+    <ion-title>Anunciar</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
       <ion-row>
         <ion-col size-sm='6' offset-sm='3'>
           <ion-item>
-            <ion-label position='floating'>title</ion-label>
+            <ion-label position='floating'>Nome</ion-label>
             <ion-input type='text' formControlName="title"></ion-input>
           </ion-item>
         </ion-col>
@@ -21,7 +21,7 @@
       <ion-row>
         <ion-col size-sm='6' offset-sm='3'>
           <ion-item>
-            <ion-label position='floating'>price</ion-label>
+            <ion-label position='floating'>Preço</ion-label>
             <ion-input type='number' formControlName="price"></ion-input>
           </ion-item>
         </ion-col>
@@ -29,7 +29,7 @@
       <ion-row>
         <ion-col size-sm='6' offset-sm='3'>
           <ion-item>
-            <ion-label position='floating'>description</ion-label>
+            <ion-label position='floating'>Descrição</ion-label>
             <ion-textarea rows='3' formControlName="description"></ion-textarea>
           </ion-item>
         </ion-col>
@@ -40,6 +40,7 @@
     <ion-row>
       <ion-col>
         <app-image-picker (imagePick)="onImagePicked($event)"></app-image-picker>
+        <ion-button (click)='callme()'>Anunciar</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -50,7 +51,7 @@
       </ion-img>
 		</ion-slide> 
 	</ion-slides>
-  <ion-button (click)='callme()'>Finish</ion-button>
+  <!-- <ion-button (click)='callme()'>Anunciar</ion-button> -->
   <!-- *ngIf="form.get('description').valid" touched -->
   <!-- [disabled]='!form.valid' -->
 </ion-content>

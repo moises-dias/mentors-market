@@ -19,7 +19,7 @@ export class ChatPage implements OnInit {
   messageId: string;
   // messages: Observable<any[]>;
   // returned: Observable<Chat>;
-  chat: Chat = {buyer: '', seller: '', messages: []};
+  chat: Chat = {buyer: '', seller: '', product: '', messages: []};
   user: string = '';
   newMsg: string = '';
   @ViewChild(IonContent, {static: true}) content: IonContent;
