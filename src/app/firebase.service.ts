@@ -9,6 +9,7 @@ export interface Test { buyer: string; product: string; messages: Array<any>; se
 // export interface Chat { buyer: string; seller: string; messages: Message[] }
 import { Chat } from './chat.model';
 import { Newproduct } from './newproduct.model';
+import { Voucher } from './voucher.model';
 
 
 // get com condição
@@ -119,6 +120,21 @@ export class FirebaseService {
       buyer: buyer,
       quantity: quantity,
     })
+  }
+
+  getVouchers() {
+    console.log('test')
+    return this.firestore.collection('vouchers').snapshotChanges()
+    .pipe(
+      map( res => {
+        return res.map( a => {
+          const data = a.payload.doc.data() as Voucher; 
+          const id = a.payload.doc.id;
+          console.log({ id, ...data })
+          return { id, ...data };
+        })
+      })
+    )
   }
 
   newChat (product: string, buyer: string, seller: string) {
