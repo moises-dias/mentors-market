@@ -42,10 +42,10 @@
   </ion-item>
   <div class="buttons" *ngIf="product.vendor !== userMail && userMail !== ''">
     <ion-button (click)="call()">Entrar em contato</ion-button>
-    <ion-button (click)="call()">Comprar</ion-button>
+    <ion-button>Comprar</ion-button>
   </div>
   <div class="buttons" *ngIf="userMail === ''">
-    <ion-button expand="block" routerLink="/auth">Acesse sua conta para comprar</ion-button>
+    <ion-button (click)="presentPrompt()" expand="block" routerLink="/auth">Acesse sua conta para comprar</ion-button>
   </div>
 
   

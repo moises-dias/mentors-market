@@ -6,6 +6,7 @@ import { FirebaseService } from '../firebase.service'
 import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
 import { Chat } from '../chat.model';
+import { AlertController } from '@ionic/angular';
 
 // export interface Test { buyer: string; messages: Array<any>; seller: string }
 
@@ -27,7 +28,8 @@ export class ChatPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private firebaseService: FirebaseService,
-    private userService: UserService
+    private userService: UserService,
+    private alertCtrl: AlertController
   ) {
     this.route.paramMap.subscribe(paramMap => {
       // console.log(paramMap.get('messageId'))
@@ -38,7 +40,7 @@ export class ChatPage implements OnInit {
         this.chat = chat; 
         setTimeout(() => {
           this.content.scrollToBottom(200);
-          console.log("scrollou")
+          // console.log("scrollou")
         },200);
       });
       // console.log('returned')
@@ -52,8 +54,36 @@ export class ChatPage implements OnInit {
     this.newMsg = '';
     setTimeout(() => {
       this.content.scrollToBottom(200);
-      console.log("scrollou")
+      // console.log("scrollou")
     },200);
+  }
+
+  async presentPrompt() {
+    let alert = await this.alertCtrl.create({
+      header: 'Detalhes do Voucher:',
+      message: `
+      <p> Produto: ${this.chat.product}</p>
+      <p>Comprador: ${this.chat.buyer}</p>
+    `,
+    
+    inputs: [
+      {
+         name: 'quantity',
+         placeholder: 'Quantity',
+         type: 'number',
+         value: '1' 
+      },
+    ],
+    buttons: [
+      'Cancelar', 
+      {
+        text: 'Enviar Voucher',
+        handler: data => {
+            this.firebaseService.newVoucher(this.chat.product, this.chat.seller, this.chat.buyer, data.quantity)
+        }
+      }],
+    });
+    await alert.present();
   }
 
   ngOnInit() {

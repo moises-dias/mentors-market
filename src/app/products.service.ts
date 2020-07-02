@@ -20,11 +20,11 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   addProduct(title: string, price: string, description: string, image: string, vendor: string){
-    console.log('here');
+    // console.log('here');
     const newProduct = new Product('', title, price, description, image, vendor);
     return this.http.post<{name: string}>('https://mentors-market.firebaseio.com/products.json', {...newProduct, id: null })
     .pipe(tap( resData => {
-      console.log(resData);
+      // console.log(resData);
     }));
   }
 
@@ -47,7 +47,7 @@ export class ProductsService {
           );
         };
       };
-      console.log(products)
+      // console.log(products)
       return products;
     }));
   }

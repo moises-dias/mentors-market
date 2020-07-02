@@ -45,7 +45,7 @@ export class FirebaseService {
     return this.firestore.collection("products").doc(id).snapshotChanges()
     .pipe(
       map( res => {
-        console.log(res.payload.data());
+        // console.log(res.payload.data());
         const data = res.payload.data() as Newproduct;
         return data;
       })
@@ -57,7 +57,7 @@ export class FirebaseService {
     return this.firestore.collection("chats").doc(id).snapshotChanges()
     .pipe(
       map( res => {
-        console.log(res.payload.data());
+        // console.log(res.payload.data());
         const data = res.payload.data() as Test;
         return data;
       })
@@ -66,14 +66,14 @@ export class FirebaseService {
   }
 
   getProducts() {
-    console.log('test')
+    // console.log('test')
     return this.firestore.collection('products').snapshotChanges()
     .pipe(
       map( res => {
         return res.map( a => {
           const data = a.payload.doc.data() as Newproduct; 
           const id = a.payload.doc.id;
-          console.log({ id, ...data })
+          // console.log({ id, ...data })
           return { id, ...data };
         })
       })
@@ -93,10 +93,10 @@ export class FirebaseService {
           .map(chat => {
             const data = chat.payload.doc.data() as Chat;
             const id = chat.payload.doc.id;
-            console.log({ id, ...data});
+            // console.log({ id, ...data});
             return { id, ...data};
           });
-          console.log(combined);
+          // console.log(combined);
           return of(combined);
       })
     )
@@ -109,6 +109,15 @@ export class FirebaseService {
       price: price,
       description: description,
       images: images
+    })
+  }
+
+  newVoucher (name: string, vendor: string, buyer: string, quantity: number) {
+    this.firestore.collection('vouchers').add({
+      name: name,
+      vendor: vendor,
+      buyer: buyer,
+      quantity: quantity,
     })
   }
 

@@ -11,7 +11,7 @@ export class UserService {
 
     setUsrMail(usrMail: string) {
         this.usrMail = usrMail;
-        console.log(usrMail);
+        // console.log(usrMail);
         this.usrMail$.next(usrMail);
     }
 

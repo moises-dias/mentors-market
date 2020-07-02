@@ -44,7 +44,7 @@ export class ProductsPage implements OnInit {
       //   })
       // }));
       this.items = this.firebaseService.getProducts();
-      console.log("items "+ this.items);
+      // console.log("items "+ this.items);
       
     }
 
@@ -64,7 +64,10 @@ export class ProductsPage implements OnInit {
       this.products = products;
       this.isLoading = false;
     });
-    this.firebaseService.getAllChats(this.userService.getUsrMail()).subscribe(chat => console.log(chat));
+    this.firebaseService.getAllChats(this.userService.getUsrMail()).subscribe(chat => 
+      //console.log(chat)
+      {}
+      );
     this.usrMail = this.userService.getUsrMail();
   }
 

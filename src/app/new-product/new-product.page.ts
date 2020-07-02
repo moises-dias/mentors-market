@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../products.service';
 import { FirebaseService } from '../firebase.service';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-product',
@@ -16,7 +17,8 @@ export class NewProductPage implements OnInit {
   constructor(
     private productsService: ProductsService,
     private userService: UserService,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class NewProductPage implements OnInit {
       this.images
     );
     this.form.reset();
+    this.router.navigateByUrl('/products');
 
 
 

@@ -26,7 +26,7 @@ export class AppComponent {
 
 
   close() {
-    console.log("test");
+    // console.log("test");
     this.menu.close();
   }
 

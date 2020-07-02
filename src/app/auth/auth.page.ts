@@ -41,8 +41,8 @@ export class AuthPage implements OnInit {
           authObs = this.authService.signup(email, password);
         }
         authObs.subscribe(resData => {
-          console.log(resData);
-          console.log("here");
+          // console.log(resData);
+          // console.log("here");
           this.userService.setUsrMail(email);
           this.isLoading = false;
           loadingEl.dismiss();
@@ -73,7 +73,7 @@ export class AuthPage implements OnInit {
     }
     const email = form.value.email;
     const password = form.value.password;
-    console.log(email, password);
+    // console.log(email, password);
     this.userService.setUsrMail(email);
     this.authenticate(email, password);
   }

@@ -31,7 +31,7 @@ export class ImagePickerComponent implements OnInit {
         this.imagePick.emit(image.base64String);
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
         return false;
       });
   }

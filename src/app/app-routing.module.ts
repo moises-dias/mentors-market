@@ -34,7 +34,11 @@ const routes: Routes = [
     path: 'chats-list',
     loadChildren: () => import('./chats-list/chats-list.module').then( m => m.ChatsListPageModule),
     canLoad: [AuthGuard]
+  },  {
+    path: 'vouchers',
+    loadChildren: () => import('./vouchers/vouchers.module').then( m => m.VouchersPageModule)
   },
+
   // { 
   //   path: '404', 
   //   loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
