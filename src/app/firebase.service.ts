@@ -122,17 +122,39 @@ export class FirebaseService {
     })
   }
 
-  getVouchers() {
-    console.log('test')
-    return this.firestore.collection('vouchers').snapshotChanges()
-    .pipe(
-      map( res => {
-        return res.map( a => {
-          const data = a.payload.doc.data() as Voucher; 
-          const id = a.payload.doc.id;
-          console.log({ id, ...data })
-          return { id, ...data };
-        })
+  // getVouchers() {
+  //   console.log('test')
+  //   return this.firestore.collection('vouchers').snapshotChanges()
+  //   .pipe(
+  //     map( res => {
+  //       return res.map( a => {
+  //         const data = a.payload.doc.data() as Voucher; 
+  //         const id = a.payload.doc.id;
+  //         console.log({ id, ...data })
+  //         return { id, ...data };
+  //       })
+  //     })
+  //   )
+  // }
+
+  getVouchers(usr: string) {
+    const buyer = this.firestore
+      .collection("vouchers", ref => ref.where("buyer","==",usr));
+    const seller = this.firestore
+      .collection("vouchers", ref => ref.where("vendor","==",usr));
+
+    return combineLatest([buyer.snapshotChanges(), seller.snapshotChanges()]).pipe(
+      mergeMap(vouchers => {
+          const [buyerVouchers, sellerVouchers] = vouchers;
+          const combined = buyerVouchers.concat(sellerVouchers)
+          .map(voucher => {
+            const data = voucher.payload.doc.data() as Voucher;
+            const id = voucher.payload.doc.id;
+            // console.log({ id, ...data});
+            return { id, ...data};
+          });
+          // console.log(combined);
+          return of(combined);
       })
     )
   }

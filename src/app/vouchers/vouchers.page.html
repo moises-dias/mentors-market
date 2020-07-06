@@ -14,11 +14,11 @@
         <ion-list>
           <ion-item *ngFor="let item of vouchers | async" 
                     >
-            
-            
             <ion-label>
               <h1>{{ item.name }}</h1>
-              <h2>{{ item.quantity | currency}}</h2>
+              <h2>{{ "Quantidade: " + item.quantity }}</h2>
+              <h2 *ngIf="item.seller === userMail">{{"Comprador: " + item.buyer}}</h2>
+              <h2 *ngIf="item.seller !== userMail">{{"Vendedor: " + item.vendor}}</h2>
               <!-- <p>{{ item.description }}</p> -->
             </ion-label>
           </ion-item>
